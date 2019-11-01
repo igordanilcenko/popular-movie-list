@@ -20,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieDetailFragment : Fragment() {
 
     private val viewModel: MovieDetailViewModel by viewModel()
+
     companion object {
 
         const val ARG_MOVIE = "ARG_MOVIE"
@@ -32,7 +33,12 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.initViewModel(arguments!!.getParcelable(ARG_MOVIE)!!)
+        val movie = requireArguments().getParcelable<Movie>(ARG_MOVIE)
+        if (movie != null) {
+            viewModel.initViewModel(movie)
+        } else {
+            throw IllegalStateException("Movie must not be null")
+        }
     }
 
     override fun onCreateView(
@@ -49,8 +55,8 @@ class MovieDetailFragment : Fragment() {
             viewLifecycleOwner,
             Observer { (movieDetail, state) ->
                 when {
+                    movieDetail != null -> showContent(movieDetail)
                     state.type == StatefulLiveData.State.Type.LOADING -> showProgress()
-                    state.type == StatefulLiveData.State.Type.READY -> showContent(movieDetail!!)
                     state is StatefulLiveData.ErrorState -> showError(state.error)
                 }
             })
@@ -59,30 +65,30 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun showProgress() {
-        view?.movie_detail_state_view?.setState(StateLayout.State.LOADING)
+        requireView().movie_detail_state_view.setState(StateLayout.State.LOADING)
     }
 
     private fun showError(error: Throwable) {
         error.printStackTrace()
-        view?.movie_detail_state_view?.setErrorState(
-            error.getErrorDialogTitle(context!!),
-            error.getErrorDialogMessage(context!!)
+        requireView().movie_detail_state_view.setErrorState(
+            error.getErrorDialogTitle(requireContext()),
+            error.getErrorDialogMessage(requireContext())
         ) { viewModel.onReloadDataClicked() }
     }
 
     private fun showContent(movieDetail: MovieDetail) {
-        view?.let {
-            it.movie_detail_recycler_view.adapter = MovieDetailAdapter(movieDetail,
-                object : MovieDetailAdapter.MovieListener {
-                    override fun onSimilarMovieSelected(movie: Movie) {
-                        viewModel.onMovieSelected(movie)
-                    }
-                })
-            it.movie_detail_state_view.setState(StateLayout.State.NORMAL)
-        }
+        requireView().movie_detail_recycler_view.adapter = MovieDetailAdapter(
+            movieDetail,
+            object : MovieDetailAdapter.MovieListener {
+                override fun onSimilarMovieSelected(movie: Movie) {
+                    viewModel.onMovieSelected(movie)
+                }
+            }
+        )
+        requireView().movie_detail_state_view.setState(StateLayout.State.NORMAL)
     }
 
     private fun navigateToMovieDetail(movie: Movie) {
-        activity?.let { it.startActivity(MovieDetailActivity.newIntent(it, movie)) }
+        requireActivity().startActivity(MovieDetailActivity.newIntent(requireContext(), movie))
     }
 }

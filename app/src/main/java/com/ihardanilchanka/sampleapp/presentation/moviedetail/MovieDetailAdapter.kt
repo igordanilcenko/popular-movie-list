@@ -11,6 +11,7 @@ import com.ihardanilchanka.sampleapp.domain.model.Movie
 import com.ihardanilchanka.sampleapp.domain.model.MovieDetail
 import com.ihardanilchanka.sampleapp.domain.model.Review
 import com.ihardanilchanka.sampleapp.presentation.misc.SimpleViewHolder
+import com.ihardanilchanka.sampleapp.presentation.moviedetail.MovieDetailAdapter.DataWrapper.*
 import com.ihardanilchanka.sampleapp.presentation.util.toYear
 import kotlinx.android.synthetic.main.item_movie_detail.view.*
 import kotlinx.android.synthetic.main.item_movie_detail_review.view.*
@@ -65,9 +66,10 @@ class MovieDetailAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is MovieDetailViewHolder -> holder.bind(items[position].movie!!)
-            is ReviewViewHolder -> holder.bind(items[position].review!!)
-            is SimilarMoviesViewHolder -> holder.bind(items[position].similarMovies!!)
+            is MovieDetailViewHolder -> holder.bind((items[position] as MovieDetailItem).movie)
+            is ReviewViewHolder -> holder.bind((items[position] as ReviewItem).review)
+            is SimilarMoviesViewHolder ->
+                holder.bind((items[position] as SimilarMoviesItem).similarMovies)
         }
     }
 
@@ -79,14 +81,14 @@ class MovieDetailAdapter(
 
     private fun setData(movieDetail: MovieDetail) {
         items.clear()
-        items.add(DataWrapper(movieDetail.movie))
+        items.add(MovieDetailItem(movieDetail.movie))
         if (movieDetail.similarMovies.isNotEmpty()) {
-            items.add(DataWrapper(movieDetail.similarMovies))
+            items.add(SimilarMoviesItem(movieDetail.similarMovies))
         }
         if (movieDetail.reviews.isNotEmpty()) {
-            items.add(DataWrapper(R.layout.item_movie_detail_reviews_title))
+            items.add(EmptyItem(R.layout.item_movie_detail_reviews_title))
             for (review in movieDetail.reviews) {
-                items.add(DataWrapper(review))
+                items.add(ReviewItem(review))
             }
         }
     }
@@ -131,22 +133,22 @@ class MovieDetailAdapter(
         fun onSimilarMovieSelected(movie: Movie)
     }
 
-    private data class DataWrapper(@LayoutRes val type: Int) {
+    private sealed class DataWrapper(@LayoutRes val type: Int) {
 
-        var movie: Movie? = null
-        var review: Review? = null
-        var similarMovies: List<Movie>? = null
+        data class MovieDetailItem(
+            val movie: Movie
+        ) : DataWrapper(R.layout.item_movie_detail)
 
-        constructor(movie: Movie) : this(R.layout.item_movie_detail) {
-            this.movie = movie
-        }
+        data class ReviewItem(
+            val review: Review
+        ) : DataWrapper(R.layout.item_movie_detail_review)
 
-        constructor(review: Review) : this(R.layout.item_movie_detail_review) {
-            this.review = review
-        }
+        data class SimilarMoviesItem(
+            val similarMovies: List<Movie>
+        ) : DataWrapper(R.layout.item_movie_detail_similar)
 
-        constructor(similarMovies: List<Movie>) : this(R.layout.item_movie_detail_similar) {
-            this.similarMovies = similarMovies
-        }
+        data class EmptyItem(
+            @LayoutRes val itemLayout: Int
+        ) : DataWrapper(itemLayout)
     }
 }

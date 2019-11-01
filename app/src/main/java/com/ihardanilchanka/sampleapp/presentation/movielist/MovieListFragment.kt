@@ -61,7 +61,7 @@ class MovieListFragment : Fragment() {
             viewLifecycleOwner,
             Observer { (movies, state) ->
                 if (state.type != Type.LOADING) {
-                    view.movie_list_swipe_to_refresh?.isRefreshing = false
+                    view.movie_list_swipe_to_refresh.isRefreshing = false
                 }
                 if (!movies.isNullOrEmpty()) {
                     showContent(movies, state)
@@ -81,47 +81,43 @@ class MovieListFragment : Fragment() {
     }
 
     private fun showProgress() {
-        view?.movie_list_state_view?.setState(StateLayout.State.LOADING)
+        requireView().movie_list_state_view.setState(StateLayout.State.LOADING)
     }
 
     private fun showEmptyList() {
-        view?.movie_list_state_view?.setState(StateLayout.State.EMPTY)
+        requireView().movie_list_state_view.setState(StateLayout.State.EMPTY)
     }
 
     private fun showError(error: Throwable) {
-        view?.movie_list_state_view?.setErrorState(
-            error.getErrorDialogTitle(context!!),
-            error.getErrorDialogMessage(context!!)
+        requireView().movie_list_state_view.setErrorState(
+            error.getErrorDialogTitle(requireContext()),
+            error.getErrorDialogMessage(requireContext())
         ) { viewModel.onReloadDataClicked() }
     }
 
-    private fun showContent(
-        movies: List<Movie>,
-        state: StatefulLiveData.State
-    ) {
-        view?.let {
-            if (it.movie_list_recycler_view.adapter == null) {
-                it.movie_list_recycler_view.adapter = MovieListAdapter(
-                    movies.toMutableList(),
-                    state,
-                    object : MovieListAdapter.OnMovieItemClickListener {
-                        override fun onReloadClicked() {
-                            viewModel.onReloadDataClicked()
-                        }
-
-                        override fun onMovieItemClicked(item: Movie) {
-                            viewModel.onMovieSelected(item)
-                        }
+    private fun showContent(movies: List<Movie>, state: StatefulLiveData.State) {
+        if (requireView().movie_list_recycler_view.adapter == null) {
+            requireView().movie_list_recycler_view.adapter = MovieListAdapter(
+                movies.toMutableList(),
+                state,
+                object : MovieListAdapter.OnMovieItemClickListener {
+                    override fun onReloadClicked() {
+                        viewModel.onReloadDataClicked()
                     }
-                )
-            } else {
-                (it.movie_list_recycler_view.adapter as MovieListAdapter).setData(movies, state)
-            }
-            it.movie_list_state_view.setState(StateLayout.State.NORMAL)
+
+                    override fun onMovieItemClicked(item: Movie) {
+                        viewModel.onMovieSelected(item)
+                    }
+                }
+            )
+        } else {
+            (requireView().movie_list_recycler_view.adapter as MovieListAdapter)
+                .setData(movies, state)
         }
+        requireView().movie_list_state_view.setState(StateLayout.State.NORMAL)
     }
 
     private fun navigateToMovieDetail(movie: Movie) {
-        activity?.let { it.startActivity(MovieDetailActivity.newIntent(it, movie)) }
+        requireActivity().startActivity(MovieDetailActivity.newIntent(requireContext(), movie))
     }
 }

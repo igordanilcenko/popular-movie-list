@@ -15,7 +15,7 @@ class MovieDetailViewModel(
     private val movieInteractor: MovieInteractor
 ) : ViewModel() {
 
-    private var movie: Movie? = null
+    private lateinit var movie: Movie
 
     private val movieDetail = StatefulLiveData<MovieDetail>()
     fun getMovieDetail(): LiveData<Pair<MovieDetail?, StatefulLiveData.State>> = movieDetail
@@ -29,9 +29,9 @@ class MovieDetailViewModel(
     }
 
     fun initViewModel(movie: Movie) {
-        if (this.movie == null) {
+        if (movieDetail.value == null) {
             this.movie = movie
-            loadMovieDetail(this.movie!!)
+            loadMovieDetail(this.movie)
         }
     }
 
@@ -48,6 +48,6 @@ class MovieDetailViewModel(
     }
 
     fun onReloadDataClicked() {
-        loadMovieDetail(this.movie!!)
+        loadMovieDetail(this.movie)
     }
 }

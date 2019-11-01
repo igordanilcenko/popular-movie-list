@@ -51,7 +51,7 @@ class StateLayout : FrameLayout {
             init()
             isInitNeeded = false
         }
-        val newShowingView: View? = when (state) {
+        val newShowingView: View = when (state) {
             State.LOADING -> progressView
             State.ERROR -> errorView
             State.NORMAL -> view
@@ -59,7 +59,7 @@ class StateLayout : FrameLayout {
         }
         val oldShowingView = getCurrentShowingView()
         // if no cross-fading needed, just show a new view and hide all others
-        if ((oldShowingView == null || state == State.LOADING) && newShowingView != null) {
+        if (oldShowingView == null || state == State.LOADING) {
             newShowingView.visibility = View.VISIBLE
             setViewsShownExcept(
                 arrayOf(newShowingView),
@@ -71,7 +71,7 @@ class StateLayout : FrameLayout {
         } else {
             crossFadeViews(oldShowingView, newShowingView)
             setViewsShownExcept(
-                arrayOf(oldShowingView!!, newShowingView!!),
+                arrayOf(oldShowingView, newShowingView),
                 progressView,
                 errorView,
                 view,
@@ -129,17 +129,12 @@ class StateLayout : FrameLayout {
         }
     }
 
-    private fun crossFadeViews(viewToHide: View?, viewToShow: View?) {
-        if (viewToHide != null) {
-            viewToHide.startAnimation(
-                AnimationUtils.loadAnimation(context, android.R.anim.fade_out)
-            )
-            viewToHide.visibility = View.INVISIBLE
-        }
-        if (viewToShow != null) {
-            viewToShow.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
-            viewToShow.visibility = View.VISIBLE
-        }
+    private fun crossFadeViews(viewToHide: View, viewToShow: View) {
+        viewToHide.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out))
+        viewToHide.visibility = View.INVISIBLE
+
+        viewToShow.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in))
+        viewToShow.visibility = View.VISIBLE
     }
 
     enum class State {

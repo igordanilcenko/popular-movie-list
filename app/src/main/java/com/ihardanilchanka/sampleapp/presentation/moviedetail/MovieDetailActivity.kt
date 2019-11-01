@@ -33,12 +33,16 @@ class MovieDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
 
-        val movie = intent.getParcelableExtra<Movie>(ARG_MOVIE_DETAIL)!!
+        val movie = intent.getParcelableExtra<Movie>(ARG_MOVIE_DETAIL)
 
-        setUpActionBar(movie)
+        if (movie != null) {
+            setUpActionBar(movie)
 
-        if (savedInstanceState == null) {
-            addFragment(MovieDetailFragment.newInstance(movie))
+            if (savedInstanceState == null) {
+                addFragment(MovieDetailFragment.newInstance(movie))
+            }
+        } else {
+            throw IllegalStateException("Movie must not be null")
         }
     }
 
