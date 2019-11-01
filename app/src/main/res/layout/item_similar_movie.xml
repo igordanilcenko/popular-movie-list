@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/global_margin_m"
+        android:layout_marginStart="@dimen/global_margin_m"
+        android:layout_marginTop="@dimen/global_margin_m"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="?colorSurface"
+        app:cardCornerRadius="@dimen/global_card_elevation"
+        app:cardElevation="@dimen/global_card_elevation"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            >
+
+        <ProgressBar
+                android:id="@+id/similar_movie_item_poster_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/similar_movie_item_poster"
+                app:layout_constraintEnd_toEndOf="@+id/similar_movie_item_poster"
+                app:layout_constraintStart_toStartOf="@+id/similar_movie_item_poster"
+                app:layout_constraintTop_toTopOf="@+id/similar_movie_item_poster"
+                />
+
+        <ImageView
+                android:id="@+id/similar_movie_item_poster"
+                android:layout_width="@dimen/movie_item_poster_width"
+                android:layout_height="0dp"
+                android:layout_marginBottom="@dimen/global_margin_m"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:layout_marginTop="@dimen/global_margin_m"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+        <TextView
+                android:id="@+id/similar_movie_item_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/global_margin_m"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:layout_marginTop="@dimen/global_margin_m"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textAppearance="?textAppearanceSubtitle1"
+                app:layout_constraintBottom_toTopOf="@+id/similar_movie_item_genres"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/similar_movie_item_poster"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Movie Title (1991)"
+                />
+
+        <TextView
+                android:id="@+id/similar_movie_item_genres"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/global_margin_m"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textAppearance="?textAppearanceCaption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/similar_movie_item_poster"
+                app:layout_constraintTop_toBottomOf="@+id/similar_movie_item_title"
+                tools:text="horror, comedy, thriller"
+                />
+
+        <RatingBar
+                android:id="@+id/similar_movie_item_rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:layout_marginTop="@dimen/global_margin_s"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.25"
+                app:layout_constraintStart_toEndOf="@+id/similar_movie_item_poster"
+                app:layout_constraintTop_toBottomOf="@+id/similar_movie_item_genres"
+                tools:rating="3.7"
+                />
+
+        <androidx.constraintlayout.widget.Group
+                android:id="@+id/group"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:constraint_referenced_ids="similar_movie_item_rating_bar,similar_movie_item_title,similar_movie_item_poster,similar_movie_item_genres,similar_movie_item_poster_progress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="3:2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

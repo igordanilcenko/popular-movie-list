@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+
+    <string name="state_view_error_default_title">An error occurred</string>
+    <string name="state_view_error_default_message">Please try again later</string>
+    <string name="state_view_error_401_title">Invalid API key: You must be granted a valid key</string>
+    <string name="state_view_error_404_title">The resource you requested could not be found</string>
+    <string name="state_view_error_no_internet_title">No internet available</string>
+    <string name="state_view_error_no_internet_message">Check your internet connection and try again</string>
+    <string name="state_view_reload">Reload</string>
+    <string name="state_view_empty">No data</string>
+    <string name="state_view_empty_endless_recycler">A full list of movies was loaded.</string>
+
+    <string name="movie_detail_item_review_title">Reviews:</string>
+    <string name="movie_detail_item_similar_movies_title">You may also like:</string>
+</resources>

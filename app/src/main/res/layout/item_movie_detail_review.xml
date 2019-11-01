@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin_m"
+        android:layout_marginTop="@dimen/global_margin_s"
+        android:layout_marginEnd="@dimen/global_margin_m"
+        android:layout_marginBottom="@dimen/global_margin_s"
+        android:elevation="@dimen/global_card_elevation"
+        android:orientation="horizontal"
+        app:cardBackgroundColor="?colorSurface"
+        app:cardCornerRadius="@dimen/global_card_elevation"
+        >
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        <TextView
+                android:id="@+id/movie_detail_review_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:layout_marginTop="@dimen/global_margin_m"
+                android:layout_marginEnd="@dimen/global_margin_m"
+                android:layout_marginBottom="@dimen/global_margin_s"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                tools:text="Author Author"
+                />
+
+        <TextView
+                android:id="@+id/movie_detail_review_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/global_margin_m"
+                android:layout_marginEnd="@dimen/global_margin_m"
+                android:layout_marginBottom="@dimen/global_margin_s"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:textColorSecondary"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis quis elit quis egestas. Mauris at urna eu enim scelerisque imperdiet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas turpis augue, bibendum vel lacinia eget, ultricies pellentesque mauris. Donec tristique urna et porttitor pharetra. "
+                />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

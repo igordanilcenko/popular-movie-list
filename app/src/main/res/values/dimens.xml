@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="global_margin_m">16dp</dimen>
+    <dimen name="global_margin_s">8dp</dimen>
+    <dimen name="global_card_elevation">2dp</dimen>
+
+    <dimen name="movie_item_index_width">24dp</dimen>
+    <dimen name="movie_item_poster_width">96dp</dimen>
+    <dimen name="movie_list_loading_layout_height">160dp</dimen>
+    <dimen name="movie_detail_image_land_max_height">200dp</dimen>
+    <dimen name="divider_width">1dp</dimen>
+</resources>

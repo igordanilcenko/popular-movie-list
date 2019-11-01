@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ihardanilchanka.sampleapp.presentation.misc.StateLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/movie_list_loading_view_state_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/movie_list_loading_layout_height"
+        app:errorLayout="@layout/layout_error_endless_recycler"
+        app:progressLayout="@layout/layout_progress_endless_recycler"
+        >
+
+    <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center_horizontal"
+            android:layout_margin="@dimen/global_margin_m"
+            android:text="@string/state_view_empty_endless_recycler"
+            />
+</com.ihardanilchanka.sampleapp.presentation.misc.StateLayout>
