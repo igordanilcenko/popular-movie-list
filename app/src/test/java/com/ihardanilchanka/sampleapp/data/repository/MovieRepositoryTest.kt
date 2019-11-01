@@ -232,7 +232,7 @@ class MovieRepositoryTest {
             verify(simpleCache).getReviewList(0)
             verify(reviewDao).getAll(0)
             verify(retrofit).getMovieReviews(eq(0), any())
-            verify(simpleCache).putReviewList(0, immutableListOf())
+            verify(simpleCache, never()).putReviewList(any(), any())
             verify(reviewDao, never()).deleteAll(any())
             verify(reviewDao, never()).insertAll(any())
         }
@@ -303,7 +303,7 @@ class MovieRepositoryTest {
             verify(simpleCache).getSimilarMovieList(0)
             verify(similarMovieDao).getAll(0)
             verify(retrofit).getSimilarMovieList(eq(0), any())
-            verify(simpleCache).putSimilarMovieList(0, immutableListOf())
+            verify(simpleCache, never()).putSimilarMovieList(any(), any())
             verify(similarMovieDao, never()).deleteAll(any())
             verify(similarMovieDao, never()).insertAll(any())
         }
