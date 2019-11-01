@@ -135,7 +135,6 @@ class MovieRepository(
         if (similarMovies.isNotEmpty()) {
             simpleCache.putSimilarMovieList(movieId, similarMovies)
         }
-        simpleCache.putSimilarMovieList(movieId, similarMovies)
         return similarMovies
     }
 }
