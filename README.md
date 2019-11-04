@@ -13,7 +13,7 @@ I created this project to show a sample of my coding and architecture skills. It
 
 ### Functionality
 
-This app is based on [The Movie Database API] (https://www.themoviedb.org/documentation/api). 
+This app is based on [The Movie Database API](https://www.themoviedb.org/documentation/api). 
 
 The main use-cases are showing **a list of popular movies** and showing **a movie detail**. 
 
@@ -34,12 +34,12 @@ Thanks to Kotlin **coroutines**, heavy operations are performed in parallel and 
 The project is written in **Kotlin**. The minimal Android **API level is 21**
 
 ### Libraries
-* [Kotlin Coroutines] (https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform async operations.
+* [Kotlin Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform async operations.
 * [AndroidX](https://developer.android.com/jetpack/androidx) - AndroidX is a major improvement to the original Android Support Library, which is no longer maintained.
 * [Material](https://material.io/develop/android/docs/getting-started/) - Material Design themes.
 * [Room](https://developer.android.com/topic/libraries/architecture/room) - an abstraction layer over the SQLite database.
 * [Retrofit2](https://square.github.io/retrofit/) - a HTTP client.
-* [Moshi] (https://github.com/square/moshi) - parsing JSON.
+* [Moshi](https://github.com/square/moshi) - parsing JSON.
 * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) and [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) from [Android Jetpack](https://developer.android.com/jetpack) - the realization of MVVM architecture.
 * [Coil](https://github.com/coil-kt/coil) - an image loading library for Android backed by Kotlin Coroutines.
 * [Koin](https://github.com/InsertKoinIO/koin) - a dependency injection framework for Kotlin.
