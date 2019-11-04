@@ -64,7 +64,7 @@ If the data aren't cached, the app will try to **load data from the internet**. 
 
 If the internet call fails, try to return **data saved to the database**.
 
-##Architecture
+## Architecture
 The app is implemented in compliance with the [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles.
 **MVVM** architecture is used for the presentation layer.
 
