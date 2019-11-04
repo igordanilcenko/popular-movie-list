@@ -14,19 +14,21 @@ class TestBlockingObserver<T>(
 ) : Observer<T> {
 
     private val queue = LinkedList<T>()
-    private var countDownLatch: CountDownLatch? = null
+    private  var countDownLatch: CountDownLatch = CountDownLatch(0)
 
     override fun onChanged(t: T) {
         queue.add(t)
-        countDownLatch?.countDown()
+        countDownLatch.countDown()
     }
 
     fun waitForValue(): T {
-        if (queue.size > 0) {
-            return queue.poll()!!
+        val first = queue.poll()
+        if (first != null) {
+            return first
         }
+
         countDownLatch = CountDownLatch(1)
-        countDownLatch!!.await(timeoutMillis, TimeUnit.MILLISECONDS)
+        countDownLatch.await(timeoutMillis, TimeUnit.MILLISECONDS)
         val result = queue.poll()
         if (result != null) {
             return result
